@@ -1,6 +1,6 @@
 # AINT152
-Luke Jansen
-Student Number: 10574224
-BSc (Hons) Computing & Games Development
-AINT152 Games Workshop
-Unity 2D Top Down Game
+Luke Jansen<br />
+Student Number: 10574224<br />
+BSc (Hons) Computing & Games Development<br />
+AINT152 Games Workshop<br />
+Unity 2D Top Down Game<br />
