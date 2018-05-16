@@ -8,10 +8,16 @@ public class PlayerBehaviour : MonoBehaviour {
     public static event UpdateHealth OnUpdateHealth;
 
     public int health = 100;
+    public bool visible = true;
 
     private Animator gunAnim;
 
-	void Update () {
+    private void Start()
+    {
+        SendHealthData();
+    }
+
+    void Update () {
 		if (Input.GetMouseButtonDown(0))
         {
             GetComponent<AudioSource>().Play();
@@ -31,6 +37,25 @@ public class PlayerBehaviour : MonoBehaviour {
         SendHealthData();
 
         if (health <= 0) Die();
+    }
+
+    public void Heal(int healAmount)
+    {
+        if ((health + healAmount) <= 100)
+        {
+            health += healAmount;
+            
+        } else if (health + healAmount <= 100)
+        {
+            health += (health + healAmount) - 100;
+        }
+
+        SendHealthData();
+    }
+
+    public void SetVisibility(bool value)
+    {
+        visible = value;
     }
 	
 	void Die()

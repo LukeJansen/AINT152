@@ -7,8 +7,12 @@ public class MoveTowardsObject : MonoBehaviour {
     public Transform target;
     public float speed = 5.0f;
 
+    private PlayerBehaviour player;
+
     private void FixedUpdate()
     {
+        player = FindObjectOfType(typeof(PlayerBehaviour));
+
         if (target != null)
         {
 
