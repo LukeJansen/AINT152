@@ -55,6 +55,7 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public void SetVisibility(bool value)
     {
+        Debug.Log(value);
         visible = value;
     }
 	
