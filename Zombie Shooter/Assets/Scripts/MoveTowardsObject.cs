@@ -19,8 +19,6 @@ public class MoveTowardsObject : MonoBehaviour {
             if (player.visible)
             {
 
-                Debug.Log("Visible");
-
                 if (GetComponent<Rigidbody2D>() != null)
                 {
                     GetComponent<Rigidbody2D>().velocity = Vector2.zero;

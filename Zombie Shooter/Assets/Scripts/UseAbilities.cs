@@ -98,6 +98,8 @@ public class UseAbilities : MonoBehaviour {
             usedTime[2] = Time.time;
             usability[2] = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
     }
 
     private void CooldownManager()

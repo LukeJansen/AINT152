@@ -45,9 +45,9 @@ public class PlayerBehaviour : MonoBehaviour {
         {
             health += healAmount;
             
-        } else if (health + healAmount <= 100)
+        } else
         {
-            health += (health + healAmount) - 100;
+            health = 100;
         }
 
         SendHealthData();

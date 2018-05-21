@@ -22,7 +22,7 @@ public class ArrowHandler : MonoBehaviour {
             transform.Translate(move, Space.World);
 
             transform.localScale = new Vector3(transform.localScale.x,
-                                               transform.localScale.y + 0.005f,
+                                               transform.localScale.y + 0.01f,
                                                transform.localScale.z);
 
         }
