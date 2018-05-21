@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114374421502714874}
   - component: {fileID: 114732094802048666}
   - component: {fileID: 114709391374216408}
+  - component: {fileID: 114166542763366594}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Zombie
@@ -146,6 +147,22 @@ PolygonCollider2D:
       - {x: 0.41, y: -0.95}
       - {x: 0.52, y: -0.66999996}
       - {x: 0.65999997, y: -0.55}
+--- !u!114 &114166542763366594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1610224046431358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76cf4d6954e4e9846a8aaf927b4d0573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: 1
+  right: 1
+  down: 1
+  left: 1
+  moveSpeed: 1
 --- !u!114 &114374421502714874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,7 +197,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1610224046431358}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2eec210df5cedc49894cb949ded1538, type: 3}
   m_Name: 
@@ -194,7 +211,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1610224046431358}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf873b06f9fd48b4cad86a856d6ffb6b, type: 3}
   m_Name: 
@@ -210,9 +227,11 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: cc12a622e2192e742bf06de20d963ee5, type: 2}
   m_StaticBatchInfo:
@@ -225,6 +244,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

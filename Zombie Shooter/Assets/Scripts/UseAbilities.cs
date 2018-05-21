@@ -22,13 +22,13 @@ public class UseAbilities : MonoBehaviour {
     private bool eUsed = false;
     private bool[] usability = new bool[3];
     private float[] usedTime = new float[3];
-    private float[] percentages = new float[3];
+    private float[] percentages = new float[4];
     
 
     // Use this for initialization
     void Start () {
         sprite = GetComponent<SpriteRenderer>();
-        eDuration = 2f;
+        eDuration = 5f;
         for (int i = 0; i < usability.Length; i++) usability[i] = true;
 	}
 	
@@ -48,9 +48,6 @@ public class UseAbilities : MonoBehaviour {
             Vector3 spawnPosition = abilitySpawn.position;
 
             qObject = Instantiate(qPrefab, spawnPosition, abilitySpawn.rotation);
-
-            usedTime[0] = Time.time;
-            usability[0] = false;
         }
 
         if (Input.GetKeyUp(KeyCode.Q))
@@ -68,19 +65,19 @@ public class UseAbilities : MonoBehaviour {
                 float scale = arrow.transform.localScale.y * 6;
 
                 hero.transform.position = hero.transform.position + (scale * unitVector);
+
+                usedTime[0] = Time.time;
+                usability[0] = false;
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && usability[1])
+        if (Input.GetKeyDown(KeyCode.E) && usability[1] && eUsed == false)
         {
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.g, 0.5f);
             hero.SendMessage("SetVisibility", false);
 
             eStart = Time.time;
             eUsed = true;
-
-            usedTime[1] = Time.time;
-            usability[1] = false;
         }
 
         if ((Time.time - eStart) > eDuration && eUsed)
@@ -88,6 +85,9 @@ public class UseAbilities : MonoBehaviour {
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.g, 1f);
             hero.SendMessage("SetVisibility", true);
             eUsed = false;
+
+            usedTime[1] = Time.time;
+            usability[1] = false;
         }
 
         if (Input.GetKeyDown(KeyCode.R) && usability[2])
@@ -111,6 +111,15 @@ public class UseAbilities : MonoBehaviour {
             else
             {
                 percentages[i] = 0;
+            }
+
+            if (Time.time - eStart < eDuration && eUsed)
+            {
+                percentages[3] = 1 - ((Time.time - eStart) / eDuration);
+            }
+            else
+            {
+                percentages[3] = 0;
             }
 
             if (Time.time - usedTime[i] > cooldowns[i] && usability[i] == false)

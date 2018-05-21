@@ -304,6 +304,7 @@
     <Compile Include="Assets\Scripts\ArrowHandler.cs" />
     <Compile Include="Assets\Scripts\Bullet2D.cs" />
     <Compile Include="Assets\Scripts\BulletHit2D.cs" />
+    <Compile Include="Assets\Scripts\EnemySurvey.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\GameUI.cs" />
     <Compile Include="Assets\Scripts\MouseSmoothLook2D.cs" />

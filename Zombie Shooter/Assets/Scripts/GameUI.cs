@@ -7,6 +7,7 @@ public class GameUI : MonoBehaviour {
 
     public Image qIcon;
     public Image eIcon;
+    public Image eInUse;
     public Image rIcon;
 
     private int health;
@@ -15,13 +16,10 @@ public class GameUI : MonoBehaviour {
 
     private float qPercentage;
     private float ePercentage;
+    private float eUsePercentage;
     private float rPercentage;
 
     private Rect boxRect = new Rect(10, 10, 300, 50);
-
-    private Rect qAbilityBox = new Rect((Screen.width / 2) - 170, (Screen.height) - 150, 100, 100);
-    private Rect eAbilityBox = new Rect((Screen.width / 2) - 50, (Screen.height) - 150, 100, 100);
-    private Rect rAbilityBox = new Rect((Screen.width / 2) + 70, (Screen.height) - 150, 100, 100);
 
     private void OnEnable()
     {
@@ -58,6 +56,7 @@ public class GameUI : MonoBehaviour {
         qPercentage = percentages[0];
         ePercentage = percentages[1];
         rPercentage = percentages[2];
+        eUsePercentage = percentages[3];
         UpdateUI();
     }
 	
@@ -66,6 +65,7 @@ public class GameUI : MonoBehaviour {
 
         qIcon.fillAmount = qPercentage;
         eIcon.fillAmount = ePercentage;
+        eInUse.fillAmount = eUsePercentage;
         rIcon.fillAmount = rPercentage;
     }
 
