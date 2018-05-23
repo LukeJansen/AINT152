@@ -9,12 +9,14 @@ public class BulletHit2D : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(damageTag))
-        {
-            Debug.Log("Hit");
-            other.SendMessage("TakeDamage", damage);
-        }
+        if (!other.CompareTag("BulletIgnore")) {
+            if (other.CompareTag(damageTag))
+            {
+                Debug.Log("Hit");
+                other.SendMessage("TakeDamage", damage);
+            }
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 }

@@ -6,27 +6,36 @@ public class ZombieBehaviour : MonoBehaviour {
 
     public int health = 10;
     public int damage = 2;
+    public float loseRange = 7.5f;
     public float adjustExplosionAngle = 0.0f;
 
     public GameObject explosionPrefab;
+    public Transform player;
 
-    private Transform player;
+    private float damageTime = 1;
 
-    void Start()
+    private void Update()
     {
-        if (GameObject.FindWithTag("Player"))
+        if (player != null)
         {
-            player = GameObject.FindWithTag("Player").transform;
-            GetComponent<MoveTowardsObject>().target = player;
-            GetComponent<SmoothLookAtTarget2D>().target = player;
+            float distance = Vector3.Distance(transform.position, player.position);
+
+            if (distance > loseRange)
+            {
+                UpdatePlayerVariable(null);
+            }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if ((Time.time - damageTime) >= 1)
         {
-            other.gameObject.SendMessage("TakeDamage", damage);
+            if (other.gameObject.CompareTag("Player"))
+            {
+                damageTime = Time.time;
+                other.gameObject.SendMessage("TakeDamage", damage);
+            }
         }
     }
 
@@ -52,4 +61,12 @@ public class ZombieBehaviour : MonoBehaviour {
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
     }
+
+    public void UpdatePlayerVariable(Transform value)
+    {
+        player = value;
+        GetComponent<MoveTowardsObject>().target = value;
+        GetComponent<SmoothLookAtTarget2D>().target = value;
+    }
+    
 }

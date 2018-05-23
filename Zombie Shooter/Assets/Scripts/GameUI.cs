@@ -9,17 +9,22 @@ public class GameUI : MonoBehaviour {
     public Image eIcon;
     public Image eInUse;
     public Image rIcon;
+    public Slider healthBar;
+
+    public GameObject tutorialPanel;
+    public Text tutorialTitle;
+    public Text tutorialText;
+    public Image tutorialImage;
+    public GameObject tutorialButton;
+    public GameObject levelButton;
 
     private int health;
     private int score;
-    private string gameInfo = "";
 
     private float qPercentage;
     private float ePercentage;
     private float eUsePercentage;
     private float rPercentage;
-
-    private Rect boxRect = new Rect(10, 10, 300, 50);
 
     private void OnEnable()
     {
@@ -61,7 +66,7 @@ public class GameUI : MonoBehaviour {
     }
 	
 	void UpdateUI () {
-        gameInfo = "Score: " + score.ToString() + "\nHealth: " + health.ToString();
+        healthBar.value = health;
 
         qIcon.fillAmount = qPercentage;
         eIcon.fillAmount = ePercentage;
@@ -69,8 +74,29 @@ public class GameUI : MonoBehaviour {
         rIcon.fillAmount = rPercentage;
     }
 
-    private void OnGUI()
+    public void LoadLevel(string name)
     {
-        GUI.Box(boxRect, gameInfo);
+        Time.timeScale = 1;
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().LoadLevel(name);
+    }
+
+    public void EnableTutorial(Sprite sprite, string title, string text, int buttonOption)
+    {
+        Time.timeScale = 0;
+        tutorialText.text = title;
+        tutorialText.text = text;
+        tutorialImage.sprite = sprite;
+        tutorialPanel.SetActive(true);
+
+        if (buttonOption == 0) tutorialButton.SetActive(true);
+        if (buttonOption == 1) levelButton.SetActive(true);
+    }
+
+    public void DismissTutorial()
+    {
+        Time.timeScale = 1;
+        tutorialPanel.SetActive(false);
+        tutorialButton.SetActive(false);
+        levelButton.SetActive(false);
     }
 }

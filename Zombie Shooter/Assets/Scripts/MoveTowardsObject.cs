@@ -6,8 +6,14 @@ public class MoveTowardsObject : MonoBehaviour {
 
     public Transform target;
     public float speed = 5.0f;
+    public Animator anim;
 
     private PlayerBehaviour player;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     private void FixedUpdate()
     {
@@ -18,14 +24,21 @@ public class MoveTowardsObject : MonoBehaviour {
 
             if (player.visible)
             {
-
-                if (GetComponent<Rigidbody2D>() != null)
+                if (Vector3.Distance(transform.position, target.transform.position) > 1.25)
                 {
-                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
-                }
+                    if (GetComponent<Rigidbody2D>() != null)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
+                    }
 
-                transform.position = Vector3.MoveTowards(transform.position, target.position, speed * 0.01f);
+                    transform.position = Vector3.MoveTowards(transform.position, target.position, speed * 0.01f);
+                    anim.SetBool("Walking", true);
+                }
+            }
+            else
+            {
+                anim.SetBool("Walking", false);
             }
         }
 

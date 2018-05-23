@@ -6,6 +6,7 @@ public class EnemySurvey : MonoBehaviour {
 
     public bool up, right, down, left;
     public float moveSpeed;
+    public float startDelay = 0;
 
     public string currentDirection;
     private Vector3 currentRotation;
@@ -44,87 +45,91 @@ public class EnemySurvey : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if ((Time.time - lastMoveTime) > moveSpeed)
-        {
-            if (currentDirection == "up")
+        if (Time.realtimeSinceStartup > startDelay) {
+            if (GetComponent<ZombieBehaviour>().player == null)
             {
-                if (right)
+                if ((Time.time - lastMoveTime) > moveSpeed)
                 {
-                    currentDirection = "right";
-                    transform.eulerAngles = rightRot;
+                    if (currentDirection == "up")
+                    {
+                        if (right)
+                        {
+                            currentDirection = "right";
+                            transform.eulerAngles = rightRot;
 
-                }
-                else if (down)
-                {
-                    transform.eulerAngles = downRot;
-                    currentDirection = "down";
-                }
-                else if (left)
-                {
-                    transform.eulerAngles = leftRot;
-                    currentDirection = "left";
+                        }
+                        else if (down)
+                        {
+                            transform.eulerAngles = downRot;
+                            currentDirection = "down";
+                        }
+                        else if (left)
+                        {
+                            transform.eulerAngles = leftRot;
+                            currentDirection = "left";
+                        }
+                    }
+
+                    else if (currentDirection == "right")
+                    {
+                        if (down)
+                        {
+                            transform.eulerAngles = downRot;
+                            currentDirection = "down";
+                        }
+                        else if (left)
+                        {
+                            transform.eulerAngles = leftRot;
+                            currentDirection = "left";
+                        }
+                        else if (up)
+                        {
+                            currentDirection = "up";
+                            transform.eulerAngles = upRot;
+                        }
+                    }
+
+                    else if (currentDirection == "down")
+                    {
+                        if (left)
+                        {
+                            transform.eulerAngles = leftRot;
+                            currentDirection = "left";
+                        }
+                        else if (up)
+                        {
+                            transform.eulerAngles = upRot;
+                            currentDirection = "up";
+                        }
+                        else if (right)
+                        {
+                            transform.eulerAngles = rightRot;
+                            currentDirection = "right";
+                        }
+                    }
+
+                    else if (currentDirection == "left")
+                    {
+                        if (up)
+                        {
+                            transform.eulerAngles = upRot;
+                            currentDirection = "up";
+                        }
+                        else if (right)
+                        {
+                            transform.eulerAngles = rightRot;
+                            currentDirection = "right";
+                        }
+                        else if (down)
+                        {
+                            transform.eulerAngles = downRot;
+                            currentDirection = "down";
+                        }
+                    }
+
+                    lastMoveTime = Time.time;
                 }
             }
-
-            else if (currentDirection == "right")
-            {
-                if (down)
-                {
-                    transform.eulerAngles = downRot;
-                    currentDirection = "down";
-                }
-                else if (left)
-                {
-                    transform.eulerAngles = leftRot;
-                    currentDirection = "left";
-                }
-                else if (up)
-                {
-                    currentDirection = "up";
-                    transform.eulerAngles = upRot;
-                }
-            }
-
-            else if (currentDirection == "down")
-            {
-                if (left)
-                {
-                    transform.eulerAngles = leftRot;
-                    currentDirection = "left";
-                }
-                else if (up)
-                {
-                    transform.eulerAngles = upRot;
-                    currentDirection = "up";
-                }
-                else if (right)
-                {
-                    transform.eulerAngles = rightRot;
-                    currentDirection = "right";
-                }
-            }
-
-            else if (currentDirection == "left")
-            {
-                if (up)
-                {
-                    transform.eulerAngles = upRot;
-                    currentDirection = "up";
-                }
-                else if (right)
-                {
-                    transform.eulerAngles = rightRot;
-                    currentDirection = "right";
-                }
-                else if (down)
-                {
-                    transform.eulerAngles = downRot;
-                    currentDirection = "down";
-                }
-            }
-
-            lastMoveTime = Time.time;
         }
 	}
 }

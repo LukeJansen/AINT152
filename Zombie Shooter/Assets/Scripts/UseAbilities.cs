@@ -10,6 +10,7 @@ public class UseAbilities : MonoBehaviour {
     public Transform abilitySpawn;
 
     public int wHealAmount;
+    public float eDuration;
     public int[] cooldowns = new int[3];
 
     public delegate void SendPercentage(float[] percentages);
@@ -17,8 +18,8 @@ public class UseAbilities : MonoBehaviour {
 
     private GameObject qObject;
     private SpriteRenderer sprite;
+    private Light spot;
     private float eStart;
-    private float eDuration;
     private bool eUsed = false;
     private bool[] usability = new bool[3];
     private float[] usedTime = new float[3];
@@ -28,7 +29,7 @@ public class UseAbilities : MonoBehaviour {
     // Use this for initialization
     void Start () {
         sprite = GetComponent<SpriteRenderer>();
-        eDuration = 5f;
+        spot = transform.GetChild(2).GetComponent<Light>();
         for (int i = 0; i < usability.Length; i++) usability[i] = true;
 	}
 	
@@ -52,7 +53,7 @@ public class UseAbilities : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.Q))
         {
-            GameObject arrow = GameObject.FindWithTag("Respawn");
+            GameObject arrow = GameObject.FindWithTag("Arrow");
 
             if (arrow != null)
             {
@@ -62,7 +63,7 @@ public class UseAbilities : MonoBehaviour {
                 float distance = Vector3.Distance(hero.transform.position, mousePosition);
                 Vector3 unitVector = (mousePosition - hero.transform.position) / distance;
 
-                float scale = arrow.transform.localScale.y * 6;
+                float scale = arrow.transform.localScale.y * 4f;
 
                 hero.transform.position = hero.transform.position + (scale * unitVector);
 
@@ -74,6 +75,7 @@ public class UseAbilities : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E) && usability[1] && eUsed == false)
         {
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.g, 0.5f);
+            spot.intensity = 10;
             hero.SendMessage("SetVisibility", false);
 
             eStart = Time.time;
@@ -83,6 +85,7 @@ public class UseAbilities : MonoBehaviour {
         if ((Time.time - eStart) > eDuration && eUsed)
         {
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.g, 1f);
+            spot.intensity = 20;
             hero.SendMessage("SetVisibility", true);
             eUsed = false;
 

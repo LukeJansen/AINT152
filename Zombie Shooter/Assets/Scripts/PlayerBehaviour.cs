@@ -9,30 +9,44 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public int health = 100;
     public bool visible = true;
+    public AudioSource audio;
+    public Light light;
 
-    private Animator gunAnim;
-
+    private SpriteRenderer sprite;
+    private bool dying = false;
+    private float time;
+    
+    
     private void Start()
     {
         SendHealthData();
+        sprite = GetComponent<SpriteRenderer>();
+
+        time = Time.time;
     }
 
     void Update () {
-		if (Input.GetMouseButtonDown(0))
+        if (dying)
         {
-            GetComponent<AudioSource>().Play();
-            GetComponent<Animator>().SetBool("isFiring", true);
+            light.GetComponent<Light>().color = new Color(5, 0, 0);
+            visible = false;
+            if (Time.time - time > 0.1)
+            {
+                sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a - 0.1f);
+                audio.volume = sprite.color.a;
+                time = Time.time;
+            }            
         }
-
-        if (Input.GetMouseButtonUp(0))
+        if (sprite.color.a <= 0)
         {
-            GetComponent<Animator>().SetBool("isFiring", false);
+            GameManager gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+            gameManager.Death();
         }
 	}
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        if (health > 0) health -= damage;
 
         SendHealthData();
 
@@ -55,13 +69,12 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public void SetVisibility(bool value)
     {
-        Debug.Log(value);
         visible = value;
     }
 	
 	void Die()
     {
-
+        dying = true;
     }
 
     void SendHealthData()

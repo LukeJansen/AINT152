@@ -22,7 +22,7 @@ public class ShootBullet : MonoBehaviour {
 
         if ( GetComponent<AudioSource>() != null)
         {
-            GetComponent<AudioSource>().Play();
+            //GetComponent<AudioSource>().Play();
         }
 
         Invoke("SetFiring", fireTime);
