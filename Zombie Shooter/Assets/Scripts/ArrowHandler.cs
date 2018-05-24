@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class ArrowHandler : MonoBehaviour {
 
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update () {
+
+        // Grow the arrow while the user holds down the button to a limit.       
         if (transform.localScale.y < 1.75)
         {
             transform.localScale = new Vector3(transform.localScale.x,
@@ -18,6 +15,7 @@ public class ArrowHandler : MonoBehaviour {
                                                transform.localScale.z);
         }
 
+        // Destroy the arrow on key up.
         if (Input.GetKeyUp(KeyCode.Q))
         {
             Destroy(gameObject);

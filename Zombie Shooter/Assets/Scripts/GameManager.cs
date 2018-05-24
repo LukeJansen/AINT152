@@ -9,22 +9,15 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        // Find the menuController object and grab the global volume for audio.
         var menuController = GameObject.FindWithTag("MenuController");
         if (audio != null) audio.volume = menuController.GetComponent<MenuScreenSettings>().volume;
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.Alpha2)) LoadLevel("Level 2");
-	}
 
+    // Method to load a scene by name.
     public void LoadLevel(string levelName)
     {
         SceneManager.LoadScene(levelName);
-    }
-
-    public void Death()
-    {
-        SceneManager.LoadScene("Game Over");
     }
 }
