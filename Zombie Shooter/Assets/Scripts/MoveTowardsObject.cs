@@ -24,7 +24,7 @@ public class MoveTowardsObject : MonoBehaviour {
 
             if (player.visible)
             {
-                if (Vector3.Distance(transform.position, target.transform.position) > 1.25)
+                if (Vector3.Distance(transform.position, target.transform.position) > 1.15)
                 {
                     if (GetComponent<Rigidbody2D>() != null)
                     {
@@ -40,6 +40,10 @@ public class MoveTowardsObject : MonoBehaviour {
             {
                 anim.SetBool("Walking", false);
             }
+        }
+        else
+        {
+            anim.SetBool("Walking", false);
         }
 
         

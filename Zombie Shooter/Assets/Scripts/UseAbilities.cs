@@ -13,9 +13,15 @@ public class UseAbilities : MonoBehaviour {
     public float eDuration;
     public int[] cooldowns = new int[3];
 
+    public AudioClip qSound;
+    public AudioClip eSound;
+    public AudioClip eFinishSound;
+    public AudioClip rSound;
+
     public delegate void SendPercentage(float[] percentages);
     public static event SendPercentage OnSendPercentages;
 
+    private AudioSource audio;
     private GameObject qObject;
     private SpriteRenderer sprite;
     private Light spot;
@@ -28,8 +34,9 @@ public class UseAbilities : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        audio = GetComponent<AudioSource>();
         sprite = GetComponent<SpriteRenderer>();
-        spot = transform.GetChild(2).GetComponent<Light>();
+        spot = transform.GetChild(1).GetComponent<Light>();
         for (int i = 0; i < usability.Length; i++) usability[i] = true;
 	}
 	
@@ -67,6 +74,9 @@ public class UseAbilities : MonoBehaviour {
 
                 hero.transform.position = hero.transform.position + (scale * unitVector);
 
+                audio.clip = qSound;
+                audio.Play();
+
                 usedTime[0] = Time.time;
                 usability[0] = false;
             }
@@ -77,6 +87,9 @@ public class UseAbilities : MonoBehaviour {
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.g, 0.5f);
             spot.intensity = 10;
             hero.SendMessage("SetVisibility", false);
+
+            audio.clip = eSound;
+            audio.Play();
 
             eStart = Time.time;
             eUsed = true;
@@ -89,6 +102,9 @@ public class UseAbilities : MonoBehaviour {
             hero.SendMessage("SetVisibility", true);
             eUsed = false;
 
+            audio.clip = eFinishSound;
+            audio.Play();
+
             usedTime[1] = Time.time;
             usability[1] = false;
         }
@@ -98,11 +114,14 @@ public class UseAbilities : MonoBehaviour {
             hero.SendMessage("Heal", wHealAmount);
             Instantiate(healParticles, hero.transform);
 
+            audio.clip = rSound;
+            audio.Play();
+
             usedTime[2] = Time.time;
             usability[2] = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+        if (Input.GetKeyDown(KeyCode.Escape)) GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().LoadLevel("Main Menu");
     }
 
     private void CooldownManager()

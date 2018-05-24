@@ -8,12 +8,12 @@ public class EnemySurvey : MonoBehaviour {
     public float moveSpeed;
     public float startDelay = 0;
 
-    public string currentDirection;
+    private string currentDirection;
     private Vector3 currentRotation;
     private float lastMoveTime;
 
     private Vector3 upRot, rightRot, downRot, leftRot;
-    private Quaternion newRot;
+    private Vector3 newRot;
     
 	// Use this for initialization
 	void Start () {
@@ -26,28 +26,32 @@ public class EnemySurvey : MonoBehaviour {
 
         if (up)
         {
-            transform.Rotate(new Vector3(0, 0, 0));
+            newRot = upRot;
             currentDirection = "up";
         } else if (right)
         {
-            transform.Rotate(new Vector3(0, 0, -90));
+            newRot = rightRot;
             currentDirection = "right";
         } else if (down)
         {
-            transform.Rotate(new Vector3(0, 0, -180));
+            newRot = downRot;
             currentDirection = "down";
         } else if (left)
         {
-            transform.Rotate(new Vector3(0, 0, -270));
+            newRot = leftRot;
             currentDirection = "left";
         }
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        if (Time.realtimeSinceStartup > startDelay) {
-            if (GetComponent<ZombieBehaviour>().player == null)
+	void Update ()
+    {
+        if (GetComponent<AgentBehaviour>().player == null)
+        {
+            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, newRot, Time.deltaTime * 3);
+            if (Time.realtimeSinceStartup > startDelay)
             {
+                
                 if ((Time.time - lastMoveTime) > moveSpeed)
                 {
                     if (currentDirection == "up")
@@ -55,17 +59,17 @@ public class EnemySurvey : MonoBehaviour {
                         if (right)
                         {
                             currentDirection = "right";
-                            transform.eulerAngles = rightRot;
+                            newRot = rightRot;
 
                         }
                         else if (down)
                         {
-                            transform.eulerAngles = downRot;
+                            newRot = downRot;
                             currentDirection = "down";
                         }
                         else if (left)
                         {
-                            transform.eulerAngles = leftRot;
+                            newRot = leftRot;
                             currentDirection = "left";
                         }
                     }
@@ -74,18 +78,18 @@ public class EnemySurvey : MonoBehaviour {
                     {
                         if (down)
                         {
-                            transform.eulerAngles = downRot;
+                            newRot = downRot;
                             currentDirection = "down";
                         }
                         else if (left)
                         {
-                            transform.eulerAngles = leftRot;
+                            newRot = leftRot;
                             currentDirection = "left";
                         }
                         else if (up)
                         {
                             currentDirection = "up";
-                            transform.eulerAngles = upRot;
+                            newRot = upRot;
                         }
                     }
 
@@ -93,17 +97,17 @@ public class EnemySurvey : MonoBehaviour {
                     {
                         if (left)
                         {
-                            transform.eulerAngles = leftRot;
+                            newRot = leftRot;
                             currentDirection = "left";
                         }
                         else if (up)
                         {
-                            transform.eulerAngles = upRot;
+                            newRot = upRot;
                             currentDirection = "up";
                         }
                         else if (right)
                         {
-                            transform.eulerAngles = rightRot;
+                            newRot = rightRot;
                             currentDirection = "right";
                         }
                     }
@@ -112,17 +116,17 @@ public class EnemySurvey : MonoBehaviour {
                     {
                         if (up)
                         {
-                            transform.eulerAngles = upRot;
+                            newRot = upRot;
                             currentDirection = "up";
                         }
                         else if (right)
                         {
-                            transform.eulerAngles = rightRot;
+                            newRot = rightRot;
                             currentDirection = "right";
                         }
                         else if (down)
                         {
-                            transform.eulerAngles = downRot;
+                            newRot = downRot;
                             currentDirection = "down";
                         }
                     }

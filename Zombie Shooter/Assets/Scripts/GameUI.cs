@@ -29,14 +29,12 @@ public class GameUI : MonoBehaviour {
     private void OnEnable()
     {
         PlayerBehaviour.OnUpdateHealth += HandleOnUpdateHealth;
-        AddScore.OnSendScore += HandleOnSendScore;
         UseAbilities.OnSendPercentages += HandleOnUpdatePercentage;
     }
 
     private void OnDisable ()
     {
         PlayerBehaviour.OnUpdateHealth -= HandleOnUpdateHealth;
-        AddScore.OnSendScore -= HandleOnSendScore;
         UseAbilities.OnSendPercentages -= HandleOnUpdatePercentage;
     }
 
@@ -83,7 +81,7 @@ public class GameUI : MonoBehaviour {
     public void EnableTutorial(Sprite sprite, string title, string text, int buttonOption)
     {
         Time.timeScale = 0;
-        tutorialText.text = title;
+        tutorialTitle.text = title;
         tutorialText.text = text;
         tutorialImage.sprite = sprite;
         tutorialPanel.SetActive(true);

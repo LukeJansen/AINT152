@@ -9,7 +9,11 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public int health = 100;
     public bool visible = true;
+
+    public AudioSource musicAudio;
     public AudioSource audio;
+    public AudioClip hitSound;
+
     public Light light;
 
     private SpriteRenderer sprite;
@@ -21,19 +25,23 @@ public class PlayerBehaviour : MonoBehaviour {
     {
         SendHealthData();
         sprite = GetComponent<SpriteRenderer>();
+        audio = GetComponent<AudioSource>();
 
         time = Time.time;
     }
 
     void Update () {
+        var startVolume = musicAudio.volume;
         if (dying)
         {
+            
+
             light.GetComponent<Light>().color = new Color(5, 0, 0);
             visible = false;
             if (Time.time - time > 0.1)
             {
                 sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a - 0.1f);
-                audio.volume = sprite.color.a;
+                musicAudio.volume = sprite.color.a * startVolume;
                 time = Time.time;
             }            
         }
@@ -41,12 +49,17 @@ public class PlayerBehaviour : MonoBehaviour {
         {
             GameManager gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
             gameManager.Death();
+            musicAudio.Stop();
+            musicAudio.volume = startVolume;
         }
 	}
 
     public void TakeDamage(int damage)
     {
         if (health > 0) health -= damage;
+
+        audio.clip = hitSound;
+        audio.Play();
 
         SendHealthData();
 

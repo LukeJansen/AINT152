@@ -6,13 +6,11 @@ public class SmoothFollow2D : MonoBehaviour {
 
     public Transform target;
     public float smoothing = 5.0f;
-    private float mapX, mapY;
+    public float mapX, mapY;
     private float minX, maxX, minY, maxY;
 
     private void Start()
-    {
-        mapX = 48;
-        mapY = 27;
+    { 
 
         var vertExtent = Camera.main.orthographicSize;
         var horzExtent = vertExtent * Screen.width / Screen.height;

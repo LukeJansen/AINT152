@@ -300,30 +300,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AddScore.cs" />
+    <Compile Include="Assets\Scripts\AgentBehaviour.cs" />
     <Compile Include="Assets\Scripts\ArrowHandler.cs" />
-    <Compile Include="Assets\Scripts\Bullet2D.cs" />
-    <Compile Include="Assets\Scripts\BulletHit2D.cs" />
+    <Compile Include="Assets\Scripts\CameraFilm.cs" />
     <Compile Include="Assets\Scripts\ColliderActivation.cs" />
     <Compile Include="Assets\Scripts\EnemyDetection.cs" />
     <Compile Include="Assets\Scripts\EnemySurvey.cs" />
-    <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameUI.cs" />
+    <Compile Include="Assets\Scripts\MenuScreenSettings.cs" />
     <Compile Include="Assets\Scripts\MouseSmoothLook2D.cs" />
     <Compile Include="Assets\Scripts\MoveTowardsObject.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
-    <Compile Include="Assets\Scripts\ShootBullet.cs" />
+    <Compile Include="Assets\Scripts\SingularityHandler.cs" />
     <Compile Include="Assets\Scripts\SmoothFollow2D.cs" />
     <Compile Include="Assets\Scripts\SmoothLookAtTarget2D.cs" />
-    <Compile Include="Assets\Scripts\SpawnObject.cs" />
-    <Compile Include="Assets\Scripts\SpawnObjectTimer.cs" />
+    <Compile Include="Assets\Scripts\StoryHandler.cs" />
     <Compile Include="Assets\Scripts\TopDownCharacterController2D.cs" />
     <Compile Include="Assets\Scripts\UseAbilities.cs" />
-    <Compile Include="Assets\Scripts\ZombieBehaviour.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Plugins\AdjustPivot\README.txt" />
     <None Include="C:\Users\lpjan\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.package-manager-ui@1.8.8\Editor\Resources\Styles\Main_Dark.uss" />
     <None Include="C:\Users\lpjan\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.package-manager-ui@1.8.8\Editor\Resources\Styles\Main_Light.uss" />
     <None Include="C:\Users\lpjan\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.package-manager-ui@1.8.8\Editor\Resources\Templates\Alert.uxml" />
